@@ -52,6 +52,15 @@ export const ContentContainer = styled.div`
   &:hover {
     opacity: 1;
   }
+
+  @media screen and (max-width: 1150px) {
+    padding: 0 15px;
+  }
+  
+  @media screen and (max-width: 750px) {
+    padding: 0 25px;
+  }
+  
 `;
 
 export const BigText = styled.h1`
