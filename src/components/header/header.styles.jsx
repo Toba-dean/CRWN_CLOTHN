@@ -13,6 +13,10 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+
+  @media screen and (max-width: 850px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
@@ -27,8 +31,17 @@ export const OptionsContainer = styled.div`
   display: flex;
   align-items: center; 
   justify-content: flex-end;
+
+  @media screen and (max-width: 850px) {
+    flex: 1;
+  }
 `;
 
 export const OptionsLink = styled(Link)`
   ${OptionContainerStyles}
+  opacity: .7;
+
+  &:hover {
+    opacity: 1;
+  }
 `;

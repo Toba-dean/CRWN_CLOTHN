@@ -5,13 +5,13 @@ import CartIcon from "../carticon/index.jsx";
 const Header = () => {
   return (
     <HeaderContainer>
-      <LogoContainer>
-        <Logo to="/" />
+      <LogoContainer to="/">
+        <Logo />
       </LogoContainer>
 
       <OptionsContainer>
         <OptionsLink to="/shop">SHOP</OptionsLink>
-        <OptionsLink to="/contact">CONTACT</OptionsLink>
+        {/* <OptionsLink to="/contact">CONTACT</OptionsLink> */}
         <OptionsLink to="/login">SIGN IN</OptionsLink>
 
         {/* cart bag */}
