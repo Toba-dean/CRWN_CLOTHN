@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { Header } from "./components";
 import { GlobalStyle } from "./global.styles";
-import { HomePage, ShopPage } from "./pages";
+import { HomePage, ShopPage, SignInAndSignOutPage } from "./pages";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
         <Route path="/">
           <Route index element={<HomePage />} />
           <Route path="shop" element={<ShopPage />} />
+          <Route path="/login" element={<SignInAndSignOutPage />} />
         </Route>
       </Routes>
     </>

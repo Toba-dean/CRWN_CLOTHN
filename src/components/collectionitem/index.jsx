@@ -17,7 +17,7 @@ const CollectionItem = ({ item }) => {
         <PriceText>${price}</PriceText>
       </ItemFooter>
 
-      <CustomButton inverted className="custom_button">
+      <CustomButton className="custom_button" inverted>
         ADD TO CART
       </CustomButton>
     </ItemContainer>
