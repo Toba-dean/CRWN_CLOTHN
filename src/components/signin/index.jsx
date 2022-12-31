@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import CustomButton from "../custombutton";
 import FormInput from "../forminput";
 import { SignInContainer, HeaderText, SpanText, ButtonGroup } from "./signin.styles";
+import { auth, signInWithGoogle } from "../../firebase/firebase";
 
 const SignIn = () => {
 
@@ -18,12 +20,27 @@ const SignIn = () => {
     setData({ ...data, [name]: value });
   }
 
+  const handleSignIn = () => {
+    const { email, password } = data;
+    signInWithEmailAndPassword(auth, email, password);
+    console.log("Signed In");
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    setData({
+      email: "",
+      password: ""
+    })
+  }
+
   return (
     <SignInContainer>
       <HeaderText>I already have an account</HeaderText>
       <SpanText>Sign in with your email and password.</SpanText>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <FormInput
           type='email'
           name='email'
@@ -45,6 +62,7 @@ const SignIn = () => {
         <ButtonGroup>
           <CustomButton
             type="submit"
+            onClick={handleSignIn}
           >
             Sign In
           </CustomButton>
@@ -52,6 +70,7 @@ const SignIn = () => {
           <CustomButton
             type='submit'
             isGoogleButton
+            onClick={signInWithGoogle}
           >
             Sign In With Google
           </CustomButton>

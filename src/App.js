@@ -1,10 +1,15 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 import { Header } from "./components";
 import { GlobalStyle } from "./global.styles";
 import { HomePage, ShopPage, SignInAndSignOutPage } from "./pages";
+import { useAuthListener } from "./hooks/useAuthListener";
 
 function App() {
+
+  const CURRENT_USER = useAuthListener();
+
   return (
     <>
       <GlobalStyle />
@@ -14,7 +19,11 @@ function App() {
         <Route path="/">
           <Route index element={<HomePage />} />
           <Route path="shop" element={<ShopPage />} />
-          <Route path="/login" element={<SignInAndSignOutPage />} />
+          <Route path="/login" element={
+            CURRENT_USER ?
+              <Navigate to="/" /> :
+              <SignInAndSignOutPage />
+          } />
         </Route>
       </Routes>
     </>
