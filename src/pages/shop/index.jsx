@@ -1,9 +1,12 @@
-import { CollectionOverview } from '../../components'
+import { CollectionOverview } from "../../components";
+// import Collection from "../collection"
 
 const ShopPage = () => {
   return (
     <>
       <CollectionOverview />
+
+      {/* <Collection /> */}
     </>
   )
 }

@@ -1,12 +1,16 @@
-import CustomButton from "../custombutton"
+import { useDispatch } from "react-redux";
+
+import CustomButton from "../custombutton";
 import {
   ItemContainer, ImageContainer,
   ItemFooter, NameText, PriceText
-} from "./collectionitem.styles"
+} from "./collectionitem.styles";
+import { addCartItem } from "../../redux/slices/cartSlice";
 
 const CollectionItem = ({ item }) => {
 
   const { name, imageUrl, price } = item
+  const dispatch = useDispatch()
 
   return (
     <ItemContainer>
@@ -17,7 +21,13 @@ const CollectionItem = ({ item }) => {
         <PriceText>${price}</PriceText>
       </ItemFooter>
 
-      <CustomButton className="custom_button" inverted>
+      <CustomButton
+        className="custom_button"
+        inverted
+        onClick={() => {
+          dispatch(addCartItem(item))
+        }}
+      >
         ADD TO CART
       </CustomButton>
     </ItemContainer>
