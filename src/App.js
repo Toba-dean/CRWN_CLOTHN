@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from "./components";
 import { GlobalStyle } from "./global.styles";
-import { HomePage, ShopPage, SignInAndSignOutPage } from "./pages";
+import { CheckOutPage, HomePage, ShopPage, SignInAndSignOutPage } from "./pages";
 import { useAuthListener } from "./hooks/useAuthListener";
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
               <Navigate to="/" /> :
               <SignInAndSignOutPage />
           } />
+          <Route path="/checkout" element={<CheckOutPage />} />
         </Route>
       </Routes>
     </>
