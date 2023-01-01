@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
 
-import { CheckOutContainer, CheckOutHeader, HeaderBlock, SpanText, Total } from "./checkout.styles";
+import { 
+  CheckOutContainer, CheckOutHeader, 
+  HeaderBlock, SpanText, Total, PayButton 
+} from "./checkout.styles";
 import { selectCartItem } from "../../redux/slices/cartSlice";
 import { CheckOutItem } from "../../components";
 
@@ -41,6 +44,10 @@ const CheckOutPage = () => {
       <Total>
         <SpanText>TOTAl: $200</SpanText>
       </Total>
+
+      <PayButton>
+        Pay Now
+      </PayButton>
     </CheckOutContainer>
   )
 }

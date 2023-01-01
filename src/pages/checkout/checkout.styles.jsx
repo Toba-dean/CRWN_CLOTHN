@@ -34,3 +34,24 @@ export const Total = styled.div`
   font-size: 36px;
 `;
 
+export const PayButton = styled.div`
+  width: 180px;
+  background-color: skyblue;
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  border-radius: 7px;
+  cursor: pointer;
+  opacity: .8;
+  transition: all ease-in .3s;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+

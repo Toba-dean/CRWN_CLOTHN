@@ -1,10 +1,14 @@
-import { 
+import { useDispatch } from "react-redux";
+
+import { addCartItem, removeCartItem, clearCartItem } from "../../redux/slices/cartSlice";
+import {
   ItemContainer, ImageContainer, NameSpan,
-   QuantitySpan, Arrow, Value, PriceSpan, RemoveButton
-  } from "./checkoutitem.styles";
+  QuantitySpan, Arrow, Value, PriceSpan, RemoveButton
+} from "./checkoutitem.styles";
 
 const CheckOutItem = ({ item }) => {
 
+  const dispatch = useDispatch();
   const { name, imageUrl, quantity, price } = item;
 
   return (
@@ -16,16 +20,16 @@ const CheckOutItem = ({ item }) => {
       <NameSpan>{name}</NameSpan>
 
       <QuantitySpan>
-        <Arrow>&#10094;</Arrow>
+        <Arrow onClick={() => dispatch(removeCartItem(item))}>&#10094;</Arrow>
 
         <Value>{quantity}</Value>
 
-        <Arrow>&#10095;</Arrow>
+        <Arrow onClick={() => dispatch(addCartItem(item))}>&#10095;</Arrow>
       </QuantitySpan>
 
       <PriceSpan>${price}</PriceSpan>
 
-      <RemoveButton>&#10008;</RemoveButton>
+      <RemoveButton onClick={() => dispatch(clearCartItem(item))}>&#10008;</RemoveButton>
     </ItemContainer>
   )
 }
