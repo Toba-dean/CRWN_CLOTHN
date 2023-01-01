@@ -1,10 +1,28 @@
-import { SHOP_DATA } from "../../components/collectionoverview/shop.data"
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { Container, BigText, ItemContainer } from "./collection.styles";
+import { selectCollection } from "../../redux/slices/shop/shopSlice";
+import { CollectionItems } from "../../components";
 
 const Collection = () => {
-  return (
-    <div>
 
-    </div>
+  const { collectionId } = useParams();
+  const collection = useSelector(selectCollection(collectionId));
+  const { title, items } = collection
+
+  return (
+    <Container>
+      <BigText>{title}</BigText>
+
+      <ItemContainer>
+        {
+          items.map(item => (
+            <CollectionItems key={item.key} item={item} />
+          ))
+        }
+      </ItemContainer>
+    </Container>
   )
 }
 

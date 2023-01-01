@@ -1,14 +1,16 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 
 import { CollectionOverview } from "../../components";
 import { db, convertCollectionSnapshotToMap } from "../../firebase/firebase";
-// import Collection from "../collection";
-import { updateCollection } from "../../redux/slices/shop/shopSlice";
+import Collection from "../collection";
+import { updateCollection, selectCollection } from "../../redux/slices/shop/shopSlice";
 import withSpinner from "../../HOC/withSpinner";
 
-const CollectionOverviewWithSpinner = withSpinner(CollectionOverview)
+const CollectionOverviewWithSpinner = withSpinner(CollectionOverview);
+const CollectionWithSpinner = withSpinner(Collection);
 
 const ShopPage = () => {
 
@@ -30,9 +32,10 @@ const ShopPage = () => {
   }, [dispatch])
 
   return (
-    <>
-      <CollectionOverviewWithSpinner isLoading={loading} />
-    </>
+    <Routes>
+      <Route index element={<CollectionOverviewWithSpinner isLoading={loading} />} />
+      <Route path="/:collectionId" element={<CollectionWithSpinner isLoading={loading} />} />
+    </Routes>
   )
 }
 

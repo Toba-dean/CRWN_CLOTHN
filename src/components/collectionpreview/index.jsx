@@ -1,10 +1,16 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 import CollectionItem from "../collectionitem";
 import { PreviewCollection, BigText, PreviewContent } from "./collectionpreview.styles";
 
 const CollectionPreview = ({ title, routeName, items }) => {
+
+  const nav = useNavigate();
+  const location = useLocation();
+
   return (
     <PreviewCollection>
-      <BigText>
+      <BigText onClick={() => nav(`${location.pathname}/${routeName}`)}>
         {title}
       </BigText>
 

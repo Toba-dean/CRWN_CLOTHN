@@ -30,13 +30,13 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<HomePage />} />
-          <Route path="shop" element={<ShopPage />} />
-          <Route path="/login" element={
+          <Route path="shop/*" element={<ShopPage />} />
+          <Route path="login" element={
             CURRENT_USER ?
               <Navigate to="/" /> :
               <SignInAndSignOutPage />
           } />
-          <Route path="/checkout" element={<CheckOutPage />} />
+          <Route path="checkout" element={<CheckOutPage />} />
         </Route>
       </Routes>
     </>
