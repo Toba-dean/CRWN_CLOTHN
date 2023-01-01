@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, setDoc, getDoc, doc } from 'firebase/firestore';
+import { getFirestore, setDoc, getDoc, doc, collection, writeBatch } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,6 +21,17 @@ export const db = getFirestore(app)
 
 // Initialize authorization
 export const auth = getAuth(app);
+
+// Making the Google sign in
+const provider = new GoogleAuthProvider();
+
+provider.setCustomParameters({
+  'prompt': 'select_account'
+});
+
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
+
+export default app;
 
 // save user data in the fire store db
 export const createUserProfile = async (userAuth, additionalData) => {
@@ -47,13 +58,43 @@ export const createUserProfile = async (userAuth, additionalData) => {
   return userRef;
 }
 
-// Making the Google sign in
-const provider = new GoogleAuthProvider();
+// Sending collection data to fire store (the entire array)
+export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {
+  // create a collection in the database with the argument passed
+  const collectionRef = collection(db, collectionKey)
 
-provider.setCustomParameters({
-  'prompt': 'select_account'
-});
+  const batch = writeBatch(db);
 
-export const signInWithGoogle = () => signInWithPopup(auth, provider);
+  // iterate through the array to add to the db, create a document of the collection ref and set with all of the objects in the array.
+  objectsToAdd.forEach(obj => {
+    const newDocRef = doc(collectionRef)
 
-export default app;
+    // this takes the document ref and then the data to add
+    batch.set(newDocRef, obj)
+  });
+
+  // add all the writes to the db as a single unit
+  return await batch.commit();
+}
+
+// Getting the SHOP collections from firebase and converting it from an object to an Map
+export const convertCollectionSnapshotToMap = collections => {
+  // The data to return 
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data()
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    }
+  });
+
+  // converting to a map of title: { collection }
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+
+}

@@ -1,7 +1,31 @@
+import { collection, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { CollectionOverview } from "../../components";
-// import Collection from "../collection"
+import { db, convertCollectionSnapshotToMap } from "../../firebase/firebase";
+// import Collection from "../collection";
+import { updateCollection } from "../../redux/slices/shop/shopSlice";
 
 const ShopPage = () => {
+
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const dispatchCollection = () => {
+      const collectionRef = collection(db, "collections");
+
+      onSnapshot(collectionRef, async snapshot => {
+        const collectionsMap = convertCollectionSnapshotToMap(snapshot)
+
+        dispatch(updateCollection(collectionsMap))
+        setLoading(true)
+      })
+    }
+    dispatchCollection()
+  }, [dispatch])
+
   return (
     <>
       <CollectionOverview />
