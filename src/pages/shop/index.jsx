@@ -1,11 +1,14 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { CollectionOverview } from "../../components";
 import { db, convertCollectionSnapshotToMap } from "../../firebase/firebase";
 // import Collection from "../collection";
 import { updateCollection } from "../../redux/slices/shop/shopSlice";
+import withSpinner from "../../HOC/withSpinner";
+
+const CollectionOverviewWithSpinner = withSpinner(CollectionOverview)
 
 const ShopPage = () => {
 
@@ -20,7 +23,7 @@ const ShopPage = () => {
         const collectionsMap = convertCollectionSnapshotToMap(snapshot)
 
         dispatch(updateCollection(collectionsMap))
-        setLoading(true)
+        setLoading(false)
       })
     }
     dispatchCollection()
@@ -28,9 +31,7 @@ const ShopPage = () => {
 
   return (
     <>
-      <CollectionOverview />
-
-      {/* <Collection /> */}
+      <CollectionOverviewWithSpinner isLoading={loading} />
     </>
   )
 }
