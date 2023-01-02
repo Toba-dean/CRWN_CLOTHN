@@ -5,7 +5,7 @@ import { HeaderContainer, LogoContainer, OptionsContainer, OptionsLink } from ".
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from "../carticon/index.jsx";
 import { selectUser } from "../../redux/slices/userSlice.js";
-import { auth } from "../../firebase/firebase.js";
+import { auth } from "../../firebase/firebase";
 import { selectHidden } from "../../redux/slices/cartSlice.js";
 import CartDropDown from "../cartdropdown";
 
@@ -13,7 +13,7 @@ const Header = () => {
 
   const user = useSelector(selectUser);
   const hidden = useSelector(selectHidden);
-
+  
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -25,7 +25,7 @@ const Header = () => {
         {/* <OptionsLink to="/contact">CONTACT</OptionsLink> */}
         {
           user ? (
-            <OptionsLink as="div" onClick={() => signOut(auth)}>
+            <OptionsLink as='div' onClick={() => signOut(auth)}>
               SIGN OUT
             </OptionsLink>
           ) : (

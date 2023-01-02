@@ -31,7 +31,7 @@ export const useAuthListener = userAuth => {
       }
     })
     return () => listener();
-  }, [dispatch])
+  }, [dispatch, userAuth])
 
   return user;
 }
