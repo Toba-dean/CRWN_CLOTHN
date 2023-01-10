@@ -28,6 +28,8 @@ export const useAuthListener = () => {
             )
           )
         })
+      } else {
+        setUser(null)
       }
     })
     return () => listener();
