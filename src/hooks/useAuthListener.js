@@ -7,7 +7,7 @@ import { auth, createUserProfile } from "../firebase/firebase";
 import { addUser, selectUser } from "../redux/slices/userSlice";
 
 
-export const useAuthListener = userAuth => {
+export const useAuthListener = () => {
 
   const dispatch = useDispatch();
   const currentUser = useSelector(selectUser)
