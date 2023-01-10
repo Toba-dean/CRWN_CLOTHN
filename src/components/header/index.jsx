@@ -4,7 +4,6 @@ import { signOut } from "firebase/auth";
 import { HeaderContainer, LogoContainer, OptionsContainer, OptionsLink } from "./header.styles.jsx";
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from "../carticon/index.jsx";
-import { selectUser } from "../../redux/slices/userSlice.js";
 import { auth } from "../../firebase/firebase";
 import { selectHidden } from "../../redux/slices/cartSlice.js";
 import CartDropDown from "../cartdropdown";
