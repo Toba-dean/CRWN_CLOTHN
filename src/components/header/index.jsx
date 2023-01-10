@@ -8,10 +8,11 @@ import { selectUser } from "../../redux/slices/userSlice.js";
 import { auth } from "../../firebase/firebase";
 import { selectHidden } from "../../redux/slices/cartSlice.js";
 import CartDropDown from "../cartdropdown";
+import { useAuthListener } from "../../hooks/useAuthListener";
 
 const Header = () => {
 
-  const user = useSelector(selectUser);
+  const user = useAuthListener();
   const hidden = useSelector(selectHidden);
   
   return (
